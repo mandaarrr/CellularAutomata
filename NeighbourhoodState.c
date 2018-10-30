@@ -34,8 +34,8 @@ PG* PG_init(int noofcells, char* init_pattern, unsigned char rule, void(*onchang
 	if (2D != NULL)
 	{
 		*2D = (PG) {
-			.cells = malloc(noofcells * sizeof(char)),
-				.next_state = malloc(noofcells * sizeof(char)),
+			.cells = malloc(noofcells * sizeof(int)),
+				.next_state = malloc(noofcells * sizeof(int)),
 				.noofcells = noofcells,
 				.rule = rule,
 				.binaryRule = "",
@@ -46,7 +46,7 @@ PG* PG_init(int noofcells, char* init_pattern, unsigned char rule, void(*onchang
 		{
 			int leftIndicator;
 			int rightIndicator;
-			char neighbourhood[4];
+			int neighbourhood[4];
 			//Setting the left and right index so that the neibourhood is set to 3 cells
 			for (int i = 0; i < 2D->noofcells; i++)
 			{
@@ -62,7 +62,7 @@ PG* PG_init(int noofcells, char* init_pattern, unsigned char rule, void(*onchang
 				neighbourhood[0] = 2D->cells[leftIndicator];
 				neighbourhood[1] = 2D->cells[i];
 				neighbourhood[2] = 2D->cells[rightIndicator];
-				neighbourhood[3] = '\0';
+				
 				//And than the if/else statements to check in which state the neibourhood is in
 				if (strcmp(neighbourhood, "111") == 0)
 					2D->next_state[i] = 2D->binaryRule[0];
