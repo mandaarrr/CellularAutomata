@@ -4,64 +4,31 @@
 #include<string.h>
 #include<math.h>
 
-//some values to initialise PG
-tyoedef struct PG PG;
-struct PG
-{
-	char* cells;
-	char* next_state;
-	int noofcells;
-	unsigned char rule;
-	char binaryRule[9];
-	void(*onchange)(PG* 2D);
-};
-//Functions that create and start the PG and frees the memory
-PG* PG_init(int cellcount, char* init_pattern, unsigned char rule, void(*onchange)(PG* 2D));
-void PG_start(PG * 2D);
-void PG_free(PG * 2D);
+
+int[][] next = new int[heights][widths];
+
+//Looping and skipping the edge cells
+for (int x = 1; x < columns-1; x++) {
+  for (int y = 1; y < rows-1; y++) {
 
 
+//Add up all the neighbor states to calculate the number of neighbors.
+    int neighbors = 0;
+    for (int i = -1; i <= 1; i++) {
+      for (int j = -1; j <= 1; j++) {
+        neighbors += board[x+i][y+j];
+      }
+    }
+
+ //subtracting the cell state itself.
+    neighbors -= board[x][y];
+
+    if      ((board[x][y] == 1) && (neighbors <  2)) next[x][y] = 0;
+    else if ((board[x][y] == 1) && (neighbors >  3)) next[x][y] = 0;
+    else if ((board[x][y] == 0) && (neighbors == 3)) next[x][y] = 1;
+    else next[x][y] = board[x][y];
 
 
-
-static void calculate_next_state(PG* 2D);
-
-PG* PG_init(int noofcells, char* init_pattern, unsigned char rule, void(*onchange)(PG* 2D))
-//Used malloc to get memory from the structure and set it's member values
-{
-	PG* 2D = malloc(sizeof(PG));
-
-	if (2D != NULL)
-	{
-		*2D = (PG) {
-			.cells = malloc(noofcells * sizeof(int)),
-				.next_state = malloc(noofcells * sizeof(int)),
-				.noofcells = noofcells,
-				.rule = rule,
-				.binaryRule = "",
-				.onchange = onchange
-		};
-
-		void calculate_next_state(PG* 2D)
-		{
-			int leftIndicator;
-			int rightIndicator;
-			int neighbourhood[4];
-			//Setting the left and right index so that the neibourhood is set to 3 cells
-			for (int i = 0; i < 2D->noofcells; i++)
-			{
-				if (i == 0)
-					leftIndicator = 2D->noofcells - 1;
-				else
-					leftIndicator = i - 1;
-				if (i == (2D->noofcells - 1))
-					rightIndicator = 0;
-				else
-					rightIndicator = i + 1;
-
-				neighbourhood[0] = 2D->cells[leftIndicator];
-				neighbourhood[1] = 2D->cells[i];
-				neighbourhood[2] = 2D->cells[rightIndicator];
 \**
 *=======================================
 *\
@@ -71,16 +38,19 @@ int binary[8]  // The array to store the binary number
 
 	for (int i = 7; i >= 0; i--)
 	{
-		if (number > pow(2, i))
+		if (number > power(2, i))
 		{
-			binary[i] = 1;
-			number -= pow(2, i);
+			printf("1");
+			number -= power(2, i);
 		}
 		else
 		{
-			binary[i] = 0;
+			printf("0");
 		}
 	}
+
+	return 1;
+}
 
 \**
 *=======================================
@@ -130,6 +100,7 @@ int returnValue(int ruleInBinary, int threeNum)
 		else if (binaryArray[2] == 1)
 			return 1;
 
+	for (int i = 7; i >= 0
 		case 110:
 		if (binaryArray[1] == 0)
 			return 0;
@@ -141,5 +112,41 @@ int returnValue(int ruleInBinary, int threeNum)
 			return 0;
 		else if (binaryArray[0] == 1)
 			return 1;
+	}
+}
+
+====================
+
+
+void main()
+{
+	int ruleInInt, width, height;
+
+	printf("Cellular Automaton");
+
+	printf("Enter the Rule: ");
+	scanf("%d", &ruleInInt);
+
+	printf("Enter the width of the grid: ");
+	scanf("%d", &width);
+
+	printf("Enter the height of the grid: ");
+	scanf("%d", &height);
+
+	int numArray[width][height];
+
+	for(int i=0; i<width; i++)
+		for(int j=0; j<height; j++)
+			numArray[i][j]=0;
+
+	numArray[width/2] = 1;
+
+	for(int i=0; i<width; i++)
+	{
+		for(int j=0; j<height; j++)
+		{
+			printf("%d ",&numArray[i][j]);
+		}
+		printf("\n");
 	}
 }
