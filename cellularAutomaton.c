@@ -66,6 +66,9 @@ PG* PG_init(int noofcells, char* init_pattern, unsigned char rule, void(*onchang
 *=======================================
 *\
 
+int number     // The number you want to convert
+int binary[8]  // The array to store the binary number
+
 	for (int i = 7; i >= 0; i--)
 	{
 		if (number > pow(2, i))
