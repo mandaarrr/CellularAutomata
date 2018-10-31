@@ -27,7 +27,7 @@ void PG_free(PG * 2D);
 static void calculate_next_state(PG* 2D);
 
 PG* PG_init(int noofcells, char* init_pattern, unsigned char rule, void(*onchange)(PG* 2D))
-//Used malloc to get memory from the structure and set it's member values 
+//Used malloc to get memory from the structure and set it's member values
 {
 	PG* 2D = malloc(sizeof(PG));
 
@@ -41,7 +41,7 @@ PG* PG_init(int noofcells, char* init_pattern, unsigned char rule, void(*onchang
 				.binaryRule = "",
 				.onchange = onchange
 		};
-		
+
 		void calculate_next_state(PG* 2D)
 		{
 			int leftIndicator;
@@ -50,11 +50,11 @@ PG* PG_init(int noofcells, char* init_pattern, unsigned char rule, void(*onchang
 			//Setting the left and right index so that the neibourhood is set to 3 cells
 			for (int i = 0; i < 2D->noofcells; i++)
 			{
-				if (i == 0)		
+				if (i == 0)
 					leftIndicator = 2D->noofcells - 1;
 				else
 					leftIndicator = i - 1;
-				if (i == (2D->noofcells - 1))		
+				if (i == (2D->noofcells - 1))
 					rightIndicator = 0;
 				else
 					rightIndicator = i + 1;
@@ -66,35 +66,18 @@ PG* PG_init(int noofcells, char* init_pattern, unsigned char rule, void(*onchang
 *=======================================
 *\
 
-int intToBin(int number) 
-int power(int num, int pwr)
-{
-	int ans = 1;
-	for (int i = 0; i < pwr; i++)
+	for (int i = 7; i >= 0; i--)
 	{
-		ans *= num;
-	}
-
-	return ans;
-}
-
-int intToBin(int number) 
-{
-	for (int i = 7; i >= 0; i--) 
-	{
-		if (number > power(2, i))
+		if (number > pow(2, i))
 		{
-			printf("1");
-			number -= power(2, i);
+			binary[i] = 1;
+			number -= pow(2, i);
 		}
-		else 
+		else
 		{
-			printf("0");
+			binary[i] = 0;
 		}
 	}
-
-	return 1;
-}
 
 \**
 *=======================================
@@ -157,4 +140,3 @@ int returnValue(int ruleInBinary, int threeNum)
 			return 1;
 	}
 }
-
