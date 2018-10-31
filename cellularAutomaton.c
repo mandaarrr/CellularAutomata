@@ -38,19 +38,16 @@ int binary[8]  // The array to store the binary number
 
 	for (int i = 7; i >= 0; i--)
 	{
-		if (number > power(2, i))
+		if (number > pow(2, i)) 
 		{
-			printf("1");
-			number -= power(2, i);
+			binary[i][o] = 1;
+			number -= pow(2, i);
 		}
 		else
 		{
-			printf("0");
+			binary[i][o] = 0;
 		}
 	}
-
-	return 1;
-}
 
 \**
 *=======================================
