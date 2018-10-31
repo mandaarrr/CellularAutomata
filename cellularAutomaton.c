@@ -5,7 +5,7 @@
 #include<math.h>
 
 
-int[][] next = new int[columns][rows];
+int[][] next = new int[heights][widths];
  
 //Looping and skipping the edge cells
 for (int x = 1; x < columns-1; x++) {
