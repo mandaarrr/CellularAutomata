@@ -281,6 +281,15 @@ void generateRandomPattern()
 	}
 }
 
+void binaryConverter()
+{
+	printf("\nEnter A Choice:\n1. Decimal to Binary\n2. Binary to Decimal\nEnter Choice: ");
+	int choice;
+	scanf("%d",&choice);
+	
+
+}
+
 void main()
 {
 	int menuChoice;
