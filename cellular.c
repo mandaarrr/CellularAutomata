@@ -14,10 +14,12 @@ void main()
 	int binaryArray[8];  // The array to store the binary number
 	int temp = 0;
 
+	int intForConversion = ruleInInt;
+
 	while(temp<8)
 	{
-		binaryArray[7-temp] = ruleInInt%2;
-		ruleInInt /= 2;
+		binaryArray[7-temp] = intForConversion%2;
+		intForConversion /= 2;
 		temp++;
 	}
 
@@ -92,6 +94,27 @@ for (int i = 1; i < height; i++)
 		printf("\n");
 	}
 
+	FILE* fileP = malloc(sizeof(FILE));
 
+	fileP = fopen("output", "w");
+
+	if (fileP == NULL) {
+		printf("File cannot be accessed.");
+		exit(1);
+	}
+
+	fprintf(fileP, "Rule %i\n", ruleInInt);
+
+	for (int i=0; i<height; i++) {
+		for (int j=0; j<width; j++) {
+			if (numArray[i][j] == 1)
+				fprintf(fileP, "\u25A0 ");
+			else
+				fprintf(fileP, "  ");
+		}
+		fprintf(fileP, "\n");
+	}
+
+	fclose(fileP);
 
 }
