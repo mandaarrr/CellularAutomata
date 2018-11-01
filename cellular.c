@@ -8,7 +8,7 @@ void generateUserPattern()
 {
 	int ruleInInt, width, height;
 
-	printf("\nEnter the Rule: ");
+	printf("Enter the Rule: ");
 	scanf("%d", &ruleInInt);
 
 	int binaryArray[8];  // The array to store the binary number
@@ -40,7 +40,7 @@ void generateUserPattern()
 	printf("\nThis is Rule %d \n",ruleInInt);
 
 
-	//Looping and skipping the edge cells
+	//Looping and skipping the first row
 	for (int i = 1; i < height; i++)
   	{
   		for (int j = 0; j < width; j++)
@@ -55,13 +55,13 @@ void generateUserPattern()
 					patternInt += 4;
 				if (numArray[i-1][j] == 0)
 					patternInt += 2;
-
-				patternInt += 1;
+				if (numArray[i-1][0] == 0)
+					patternInt += 1;
 			}
 			else if (j==0)
 			{
-				patternInt += 4;
-
+				if (numArray[i-1][width] == 0)
+					patternInt += 4;
 				if (numArray[i-1][j] == 0)
 					patternInt += 2;
 				if (numArray[i-1][j+1] == 0)
@@ -98,7 +98,7 @@ void generateUserPattern()
 
 
 	printf("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-	printf("\nDo you want to save this pattern? Press 1 to Save. Any other number to return to Main Menu\nYour Choice: ");
+	printf("\nDo you want to save this pattern?\nPress 1 to Save. Any other key to return to Main Menu\nYour Choice: ");
 	int saveChoice;
 	scanf("%d",&saveChoice);
 
@@ -134,6 +134,7 @@ void generateUserPattern()
 				}
 
 				fclose(fileP);
+				printf("Pattern Saved.");
 				break;
 			}
 
@@ -196,13 +197,13 @@ void generateRandomPattern()
 					patternInt += 4;
 				if (numArray[i-1][j] == 0)
 					patternInt += 2;
-
-				patternInt += 1;
+				if (numArray[i-1][0] == 0)
+					patternInt += 1;
 			}
 			else if (j==0)
 			{
-				patternInt += 4;
-
+				if (numArray[i-1][width] == 0)
+					patternInt += 4;
 				if (numArray[i-1][j] == 0)
 					patternInt += 2;
 				if (numArray[i-1][j+1] == 0)
@@ -238,7 +239,7 @@ void generateRandomPattern()
 	}
 
 	printf("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-	printf("\nDo you want to save this pattern? Press 1 to Save. Any other number to return to Main Menu\nYour Choice: ");
+	printf("\nDo you want to save this pattern? Press 1 to Save. Any other key to return to Main Menu\nYour Choice: ");
 	int saveChoice;
 	scanf("%d",&saveChoice);
 
@@ -274,6 +275,7 @@ void generateRandomPattern()
 				}
 
 				fclose(fileP);
+				printf("Pattern Saved.");
 				break;
 			}
 
@@ -295,7 +297,7 @@ void main()
 	int menuChoice;
 
 	menuChoice = 0;
-	
+
 	do
 	{
 		printf("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
@@ -305,7 +307,7 @@ void main()
 		printf("\n1. Generate Pattern by Choosing a rule");
 		printf("\n2. Generate Pattern using a random rule");
 		printf("\n3. Binary Converter");
-		printf("\nPress Any other Number to Exit");
+		printf("\nPress Any other key to Exit");
 		printf("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
 		printf("Your Choice: ");
 		scanf("%d", &menuChoice);
@@ -330,7 +332,7 @@ void main()
 		}
 
 	}while (menuChoice != -1);
-	
+
 
 
 }
