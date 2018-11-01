@@ -8,7 +8,7 @@ void generateUserPattern()
 {
 	int ruleInInt, width, height;
 
-	printf("Enter the Rule: ");
+	printf("\nEnter the Rule: ");
 	scanf("%d", &ruleInInt);
 
 	int binaryArray[8];  // The array to store the binary number
@@ -98,7 +98,7 @@ void generateUserPattern()
 
 
 	printf("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-	printf("\nDo you want to save this pattern? Press 1 to Save. Any other key to return to Main Menu\nYour Choice: ");
+	printf("\nDo you want to save this pattern? Press 1 to Save. Any other number to return to Main Menu\nYour Choice: ");
 	int saveChoice;
 	scanf("%d",&saveChoice);
 
@@ -238,7 +238,7 @@ void generateRandomPattern()
 	}
 
 	printf("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-	printf("\nDo you want to save this pattern? Press 1 to Save. Any other key to return to Main Menu\nYour Choice: ");
+	printf("\nDo you want to save this pattern? Press 1 to Save. Any other number to return to Main Menu\nYour Choice: ");
 	int saveChoice;
 	scanf("%d",&saveChoice);
 
@@ -286,7 +286,7 @@ void binaryConverter()
 	printf("\nEnter A Choice:\n1. Decimal to Binary\n2. Binary to Decimal\nEnter Choice: ");
 	int choice;
 	scanf("%d",&choice);
-	
+
 
 }
 
@@ -305,7 +305,7 @@ void main()
 		printf("\n1. Generate Pattern by Choosing a rule");
 		printf("\n2. Generate Pattern using a random rule");
 		printf("\n3. Binary Converter");
-		printf("\nPress Any other key to Exit");
+		printf("\nPress Any other Number to Exit");
 		printf("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
 		printf("Your Choice: ");
 		scanf("%d", &menuChoice);
