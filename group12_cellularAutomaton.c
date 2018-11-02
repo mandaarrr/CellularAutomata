@@ -1,3 +1,9 @@
+/*
+*Cellular Automaton - Group 12
+*Name:		Archie Rutherford		Mandar Tamhane		Stanislav Turcanu
+*Matric:	170010226			170021792		170011034
+*/
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
