@@ -356,6 +356,61 @@ void decimalToBinary()
 }
 
 
+void gameOfLife()
+{
+  int width = 5;
+  int height = 5;
+
+  int board[height][width];
+
+  srand(time(NULL));
+  int rNum;
+
+  for (int i=0; i<height; i++) {
+    for (int o=0; o<width; o++) {
+      rNum = rand()%2;
+      printf("%i", rNum);
+      board[i][o] = rNum;
+    }
+  }
+
+  int count = 0;
+
+  while (count++ < 10) {
+
+    printf("\n\n");
+    for (int i=0; i<height; i++) {
+      printf("\n");
+      for (int o=0; o<width; o++) {
+        if (board[i][o] == 1)
+          printf("\u25A0 ");
+        else
+          printf("\u25A1 ");
+      }
+    }
+
+    for (int i=0; i<height; i++) {
+      for (int o=0; o<width; o++) {
+
+        int counter = 0;
+        for (int y=-1; y<2; y++) {
+          for (int x=-1; x<2; x++) {
+
+            if (board[i+y][o+x] == 1 && !(y==0 && x==0) && !(o+x<0 || i+y<0))
+              counter++;
+          }
+        }
+
+        if (board[i][o]==1 && counter<2)
+          board[i][o] = 0;
+        else if (board[i][o]==1 && counter>3)
+          board[i][o] = 0;
+        else if (board[i][o]==0 && counter==3)
+          board[i][o] = 1;
+      }
+    }
+  }
+}
 
 
 void main()
