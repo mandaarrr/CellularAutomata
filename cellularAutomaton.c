@@ -355,6 +355,9 @@ void decimalToBinary()
 	return;
 }
 
+
+
+
 void main()
 {
 	int menuChoice;
@@ -371,6 +374,7 @@ void main()
 		printf("\n1. Generate Pattern by Choosing a rule");
 		printf("\n2. Generate Pattern using a random rule");
 		printf("\n3. Binary Converter");
+		printf("\n4. Conway's Game of Life");
 		printf("\nPress Any other Number to Exit");
 		printf("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
 		printf("Your Choice: ");
@@ -387,6 +391,9 @@ void main()
 
 			case 3: decimalToBinary();
 					break;
+			
+			case 4: gameOfLife();
+				break;
 
 			default:
 				{
