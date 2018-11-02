@@ -355,7 +355,6 @@ void decimalToBinary()
 	return;
 }
 
-
 void gameOfLife()
 {
   int width = 5;
@@ -411,7 +410,6 @@ void gameOfLife()
     }
   }
 }
-
 
 void main()
 {
