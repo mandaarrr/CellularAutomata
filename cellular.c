@@ -3,33 +3,51 @@
 #include<math.h>
 #include<time.h>
 
-
-void generateUserPattern()
+void generateUserPattern() //generate pattern using rule entered by user
 {
 	int ruleInInt, width, height;
 
-	printf("Enter the Rule: ");
+
+	printf("\nEnter the Rule (between 0 and 255): ");
 	scanf("%d", &ruleInInt);
+	if (ruleInInt<0 || ruleInInt>255) //checking if rule is 8 bit convertable
+	{
+		printf("\nInvalid Input. Returning to Main Menu...\n");
+		return;
+	}
+
 
 	int binaryArray[8];  // The array to store the binary number
 	int temp = 0;
 
-	int intForConversion = ruleInInt;
+	int intForConversion = ruleInInt; //copying the value of the rule
 
-	while(temp<8)
+	while(temp<8) //converting rule to binary
 	{
 		binaryArray[7-temp] = intForConversion%2;
 		intForConversion /= 2;
 		temp++;
 	}
 
-	printf("\nEnter the length of the generation: ");
+
+	printf("Enter the length of the generation: ");
 	scanf("%d", &width);
+	if (width<0 || width>999)
+	{
+		printf("\nInvalid Input. Returning to Main Menu...\n");
+		return;
+	}
 
 	printf("Enter the number of generations: ");
 	scanf("%d", &height);
+	if (height<0 || height>999)
+	{
+		printf("\nInvalid Input. Returning to Main Menu...\n");
+		return;
+	}
 
-	int numArray[height][width];
+
+	int numArray[height][width]; //creating number array
 
 	for (int i = 0; i < height; i++)
 		for(int j=0; j<width; j++)
@@ -37,10 +55,10 @@ void generateUserPattern()
 
 	numArray[0][width/2] = 1;
 
+
 	printf("\nThis is Rule %d \n",ruleInInt);
 
 
-	//Looping and skipping the first row
 	for (int i = 1; i < height; i++)
   	{
   		for (int j = 0; j < width; j++)
@@ -49,7 +67,7 @@ void generateUserPattern()
 
 			int patternInt = 0;
 
-			if (j==width)
+			if (j==width) //populating rightmost edge
 			{
 				if (numArray[i-1][j-1] == 0)
 					patternInt += 4;
@@ -58,7 +76,7 @@ void generateUserPattern()
 				if (numArray[i-1][0] == 0)
 					patternInt += 1;
 			}
-			else if (j==0)
+			else if (j==0) //populating leftmost edge
 			{
 				if (numArray[i-1][width] == 0)
 					patternInt += 4;
@@ -67,7 +85,7 @@ void generateUserPattern()
 				if (numArray[i-1][j+1] == 0)
 					patternInt += 1;
 			}
-			else
+			else //pattern matching and finding value in next state
 			{
 				if (numArray[i-1][j-1] == 0)
 					patternInt += 4;
@@ -84,7 +102,8 @@ void generateUserPattern()
 		}
 	}
 
-	for(int i=0; i<height; i++)
+
+	for(int i=0; i<height; i++) //converting number array into graphic pattern
 	{
 		for(int j=0; j<width; j++)
 		{
@@ -98,7 +117,7 @@ void generateUserPattern()
 
 
 	printf("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-	printf("\nDo you want to save this pattern?\nPress 1 to Save. Any other key to return to Main Menu\nYour Choice: ");
+	printf("\nDo you want to save this pattern?\nPress 1 to Save. Any other number to return to Main Menu\nYour Choice: "); //asking user to save file
 	int saveChoice;
 	scanf("%d",&saveChoice);
 
@@ -109,9 +128,9 @@ void generateUserPattern()
 
 			{
 
-				FILE* fileP = malloc(sizeof(FILE));
+				FILE* fileP = malloc(sizeof(FILE)); // file pointer and allocating memory for file
 
-				fileP = fopen("output", "w");
+				fileP = fopen("output", "w"); //open file at pointer in write mode
 
 				if (fileP == NULL)
 				{
@@ -121,7 +140,7 @@ void generateUserPattern()
 
 				fprintf(fileP, "Rule %i\n", ruleInInt);
 
-				for (int i=0; i<height; i++)
+				for (int i=0; i<height; i++) //writing the pattern in the file
 				{
 					for (int j=0; j<width; j++)
 					{
@@ -138,7 +157,8 @@ void generateUserPattern()
 				break;
 			}
 
-		default: break;
+		default: printf("\nReturning to Menu...\n");
+					break;
 	}
 }
 
@@ -146,12 +166,14 @@ void generateRandomPattern()
 {
 	int ruleInInt, width, height;
 
+
     srand(time(NULL)); //Seeding with current time
     ruleInInt = rand() % 255;
     if(ruleInInt < 1)
     {
         ruleInInt += 1;
     }
+
 
 	int binaryArray[8];  // The array to store the binary number
 	int temp = 0;
@@ -165,11 +187,23 @@ void generateRandomPattern()
 		temp++;
 	}
 
+
 	printf("\nEnter the length of the generation: ");
 	scanf("%d", &width);
+	if (width<0 || width>999)
+	{
+		printf("\nInvalid Input. Returning to Main Menu...\n");
+		return;
+	}
 
 	printf("Enter the number of generations: ");
 	scanf("%d", &height);
+	if (height<0 || height>999)
+	{
+		printf("\nInvalid Input. Returning to Main Menu...\n");
+		return;
+	}
+
 
 	int numArray[height][width];
 
@@ -179,16 +213,13 @@ void generateRandomPattern()
 
 	numArray[0][width/2] = 1;
 
+
 	printf("\nThis is Rule %d \n",ruleInInt);
 
-
-	//Looping and skipping the edge cells
 	for (int i = 1; i < height; i++)
  	 {
   		for (int j = 0; j < width; j++)
  	 	{
-	//Add up all the neighbor states to calculate the number of neighbors.
-
 			int patternInt = 0;
 
 			if (j==width)
@@ -226,7 +257,8 @@ void generateRandomPattern()
 		}
 	}
 
-	for(int i=0; i<height; i++)
+
+	for(int i=0; i<height; i++) //printing graphic array
 	{
 		for(int j=0; j<width; j++)
 		{
@@ -238,8 +270,9 @@ void generateRandomPattern()
 		printf("\n");
 	}
 
+
 	printf("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-	printf("\nDo you want to save this pattern? Press 1 to Save. Any other key to return to Main Menu\nYour Choice: ");
+	printf("\nDo you want to save this pattern? Press 1 to Save. Any other number to return to Main Menu\nYour Choice: ");
 	int saveChoice;
 	scanf("%d",&saveChoice);
 
@@ -279,17 +312,41 @@ void generateRandomPattern()
 				break;
 			}
 
-		default: break;
+		default: printf("\nReturning to Menu...\n");
+				break;
 	}
 }
 
-void binaryConverter()
+void decimalToBinary()
 {
-	printf("\nEnter A Choice:\n1. Decimal to Binary\n2. Binary to Decimal\nEnter Choice: ");
-	int choice;
-	scanf("%d",&choice);
+	int binaryArray[8]; // The array to store the binary number
+	int numInDecimal = 0;
+	int temp = 0;
 
+	printf("\nEnter decimal number between 0 and 255: ");
+	scanf("%d",&numInDecimal);
+	if (numInDecimal<0 || numInDecimal>255)
+	{
+		printf("\nInvalid Input. Returning to Menu...\n");
+		return;
+	}
 
+	int numInDecimal_copy = numInDecimal;
+
+	while(temp<8)
+	{
+		binaryArray[7-temp] = numInDecimal%2;
+		numInDecimal /= 2;
+		temp++;
+	}
+
+	printf("\nThe Binary conversion for %d is ", numInDecimal_copy);
+
+	for(int i=0; i<8; i++)
+		printf("%d", binaryArray[i]);
+
+	printf("\nReturning to Menu...\n");
+	return;
 }
 
 void main()
@@ -300,14 +357,15 @@ void main()
 
 	do
 	{
-		printf("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
+		printf("\n");
+		printf("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
 		printf("Cellular Automaton");
 		printf("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
 		printf("\nEnter A Choice");
 		printf("\n1. Generate Pattern by Choosing a rule");
 		printf("\n2. Generate Pattern using a random rule");
 		printf("\n3. Binary Converter");
-		printf("\nPress Any other key to Exit");
+		printf("\nPress Any other Number to Exit");
 		printf("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
 		printf("Your Choice: ");
 		scanf("%d", &menuChoice);
@@ -321,18 +379,15 @@ void main()
 			case 2: generateRandomPattern();
 					break;
 
-			//case 3: binaryConverter();
-			//		break;
+			case 3: decimalToBinary();
+					break;
 
 			default:
 				{
-						printf("\nClosing the program...");
+						printf("\nClosing the program...\n\n");
 						menuChoice = -1;
 					}
 		}
 
 	}while (menuChoice != -1);
-
-
-
 }
